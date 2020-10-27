@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class Calculators extends StatefulWidget {
+class MaxCalculator extends StatefulWidget {
   @override
-  _CalculatorsState createState() => _CalculatorsState();
+  _MaxCalculatorState createState() => _MaxCalculatorState();
 }
 
-class _CalculatorsState extends State<Calculators> {
+class _MaxCalculatorState extends State<MaxCalculator> {
   TextEditingController firstNumberController = new TextEditingController();
   TextEditingController secondNumberController = new TextEditingController();
 
