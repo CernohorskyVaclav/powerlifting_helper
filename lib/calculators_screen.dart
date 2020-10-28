@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:powerlifting_helper/max_calc_screen.dart';
+import 'package:powerlifting_helper/rpe_calc_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Calculators extends StatefulWidget {
@@ -112,81 +114,30 @@ class _CalculatorsState extends State<Calculators> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            //1RM calc
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 0.0,
-                  ),
+            ButtonTheme(
+              height: 100.0,
+              minWidth: 500.0,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: FlatButton(
+                  color: Colors.orange[500],
+                  textColor: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MaxCalculator()),
+                    );
+                  },
                   child: Text(
-                    'One Rep Max Calculator',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.orange[500],
-                    ),
+                    "One Rep Max Caluclator",
+                    style: TextStyle(fontSize: 25),
                   ),
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: TextField(
-                controller: firstNumberController,
-                cursorColor: Colors.orange[500],
-                //obscureText: true,
-                decoration: InputDecoration(
-                    labelStyle: new TextStyle(
-                      color: Colors.orange[500],
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    labelText: 'Insert weight here'),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: TextField(
-                controller: secondNumberController,
-                cursorColor: Colors.orange[500],
-                //obscureText: true,
-                decoration: InputDecoration(
-                    labelStyle: new TextStyle(
-                      color: Colors.orange[500],
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    labelText: 'Insert number of reps here'),
-              ),
-            ),
-            FlatButton(
-              color: Colors.orange[500],
-              textColor: Colors.white,
-              onPressed: () {
-                calculateOneRM();
-                return Alert(
-                        context: context,
-                        title: "Your 1RM is:",
-                        desc: answerOneMax.toString())
-                    .show();
-              },
-              child: Text(
-                "Calculate",
-              ),
-            ),
+
             //thicc line
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -196,82 +147,25 @@ class _CalculatorsState extends State<Calculators> {
                 color: Colors.orange[500],
               ),
             ),
-            //RPE to % calc
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20.0,
-                    vertical: 0.0,
-                  ),
+            ButtonTheme(
+              height: 100.0,
+              minWidth: 500.0,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.0),
+                child: FlatButton(
+                  color: Colors.orange[500],
+                  textColor: Colors.white,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => RpeCalculator()),
+                    );
+                  },
                   child: Text(
-                    'RPE to % Calculator',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.orange[500],
-                    ),
+                    "RPE to % Caluclator",
+                    style: TextStyle(fontSize: 25),
                   ),
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: TextField(
-                controller: thirdNumberController,
-                cursorColor: Colors.orange[500],
-                //obscureText: true,
-                decoration: InputDecoration(
-                    labelStyle: new TextStyle(
-                      color: Colors.orange[500],
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    labelText: 'Insert reps here (1 - 10)'),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: TextField(
-                controller: fourthNumberController,
-                cursorColor: Colors.orange[500],
-                //obscureText: true,
-                decoration: InputDecoration(
-                    labelStyle: new TextStyle(
-                      color: Colors.orange[500],
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange[500]),
-                    ),
-                    labelText: 'Insert RPE here (6.5 - 10)'),
-              ),
-            ),
-            FlatButton(
-              color: Colors.orange[500],
-              textColor: Colors.white,
-              onPressed: () {
-                calculateRPEToPercentage();
-                return Alert(
-                        context: context,
-                        title: thirdNumberController.text +
-                            " " +
-                            repsString +
-                            " at " +
-                            fourthNumberController.text +
-                            " rpe is:",
-                        desc: answer.toString() + "%")
-                    .show();
-              },
-              child: Text(
-                "Calculate",
               ),
             ),
           ]),
