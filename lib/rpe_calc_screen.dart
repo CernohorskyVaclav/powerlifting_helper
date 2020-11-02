@@ -85,7 +85,6 @@ class _RpeCalculatorState extends State<RpeCalculator> {
           break;
       }
       reps = int.parse(thirdNumberController.text) - 1;
-      print(rpeSpreadScheet[rpe][reps]);
       answer = rpeSpreadScheet[rpe][reps];
     }
   }

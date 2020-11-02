@@ -25,10 +25,6 @@ class _NavState extends State<Nav> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Powerlifting Helper'),
-        backgroundColor: Colors.orange[500],
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
