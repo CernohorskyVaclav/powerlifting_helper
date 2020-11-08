@@ -45,17 +45,17 @@ class _MaxCalculatorState extends State<MaxCalculator> {
                 ),
                 child: TextField(
                   controller: firstNumberController,
-                  cursorColor: Colors.orange[500],
+                  cursorColor: Colors.black,
                   //obscureText: true,
                   decoration: InputDecoration(
                       labelStyle: new TextStyle(
-                        color: Colors.orange[500],
+                        color: Colors.black,
                       ),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange[500]),
+                        borderSide: BorderSide(color: Colors.grey[500]),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange[500]),
+                        borderSide: BorderSide(color: Colors.grey[500]),
                       ),
                       labelText: 'Insert weight here'),
                 ),
@@ -67,17 +67,17 @@ class _MaxCalculatorState extends State<MaxCalculator> {
                 ),
                 child: TextField(
                   controller: secondNumberController,
-                  cursorColor: Colors.orange[500],
+                  cursorColor: Colors.black,
                   //obscureText: true,
                   decoration: InputDecoration(
                       labelStyle: new TextStyle(
-                        color: Colors.orange[500],
+                        color: Colors.black,
                       ),
                       enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange[500]),
+                        borderSide: BorderSide(color: Colors.grey[500]),
                       ),
                       focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orange[500]),
+                        borderSide: BorderSide(color: Colors.grey[500]),
                       ),
                       labelText: 'Insert number of reps here'),
                 ),
