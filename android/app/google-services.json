@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "974941877625",
+    "firebase_url": "https://powerlifting-helper-2961d.firebaseio.com",
+    "project_id": "powerlifting-helper-2961d",
+    "storage_bucket": "powerlifting-helper-2961d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:974941877625:android:7a33042611199eea7daba8",
+        "android_client_info": {
+          "package_name": "com.vaclavcernohorsky.powerlifting_helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "974941877625-qrkt5vmkv2qtg2p7ul3tl1l82sadpbs9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGQ0KTT517W8bIfBqEc-aEBy5v-z0C_rY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "974941877625-qrkt5vmkv2qtg2p7ul3tl1l82sadpbs9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "974941877625-r12o8mfp7b4sl7t3dsum8d1qmikaqs72.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.vaclavcernohorsky.powerliftingHelper"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
