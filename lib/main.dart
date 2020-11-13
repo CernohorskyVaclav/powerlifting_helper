@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:powerlifting_helper/nav.dart';
+import 'package:powerlifting_helper/sign_in.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     // TODO: implement build
     return MaterialApp(
       title: 'Power Helper',
-      home: Nav(),
+      home: SignIn(),
     );
   }
 }
