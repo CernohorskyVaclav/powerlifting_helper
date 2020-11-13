@@ -12,7 +12,7 @@ class _NewWorkoutState extends State<NewWorkout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Workout'),
+        title: Text('New Workout+'),
         backgroundColor: Colors.orange[500],
       ),
       body: Center(
