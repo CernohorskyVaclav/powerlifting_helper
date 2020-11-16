@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:powerlifting_helper/workouts_screen.dart';
 
 class NewWorkout extends StatefulWidget {
   @override
@@ -6,13 +7,30 @@ class NewWorkout extends StatefulWidget {
 }
 
 String dropdownStr = "Bench press";
+String exerciseValue = "";
+String sets = "";
+String reps = "";
+String weight = "";
 
 class _NewWorkoutState extends State<NewWorkout> {
+  var _setsTextController = new TextEditingController();
+  var _repsTextController = new TextEditingController();
+  var _weightTextController = new TextEditingController();
+
+  void getItems() {
+    setState(() {
+      exerciseValue = dropdownStr;
+      sets = _setsTextController.text;
+      reps = _repsTextController.text;
+      weight = _weightTextController.text;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Workout+'),
+        title: Text('New Workout'),
         backgroundColor: Colors.orange[500],
       ),
       body: Center(
@@ -66,7 +84,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                   horizontal: 0,
                 ),
                 child: TextField(
-                  //controller: firstNumberController,
+                  controller: _setsTextController,
                   cursorColor: Colors.black,
                   //obscureText: true,
                   decoration: InputDecoration(
@@ -88,7 +106,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                   horizontal: 0,
                 ),
                 child: TextField(
-                  //controller: firstNumberController,
+                  controller: _repsTextController,
                   cursorColor: Colors.black,
                   //obscureText: true,
                   decoration: InputDecoration(
@@ -110,7 +128,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                   horizontal: 0,
                 ),
                 child: TextField(
-                  //controller: firstNumberController,
+                  controller: _weightTextController,
                   cursorColor: Colors.black,
                   //obscureText: true,
                   decoration: InputDecoration(
@@ -133,7 +151,19 @@ class _NewWorkoutState extends State<NewWorkout> {
                 child: FlatButton(
                   color: Colors.orange[500],
                   textColor: Colors.white,
-                  onPressed: () {},
+                  onPressed: () {
+                    getItems();
+                    Navigator.pop(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => new Workouts(
+                            exerciseValue: exerciseValue,
+                            sets: sets,
+                            reps: reps,
+                            weight: weight,
+                          ),
+                        ));
+                  },
                   child: Text(
                     "Add exercise",
                     style: TextStyle(
@@ -149,5 +179,3 @@ class _NewWorkoutState extends State<NewWorkout> {
     );
   }
 }
-
-class StatefulWidgetWidget {}
