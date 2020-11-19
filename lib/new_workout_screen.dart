@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/workouts_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NewWorkout extends StatefulWidget {
   @override
@@ -11,11 +12,13 @@ String exerciseValue = "";
 String sets = "";
 String reps = "";
 String weight = "";
+String comment = "";
 
 class _NewWorkoutState extends State<NewWorkout> {
   var _setsTextController = new TextEditingController();
   var _repsTextController = new TextEditingController();
   var _weightTextController = new TextEditingController();
+  var _commentTextController = new TextEditingController();
 
   void getItems() {
     setState(() {
@@ -23,6 +26,7 @@ class _NewWorkoutState extends State<NewWorkout> {
       sets = _setsTextController.text;
       reps = _repsTextController.text;
       weight = _weightTextController.text;
+      comment = _commentTextController.text;
     });
   }
 
@@ -30,6 +34,7 @@ class _NewWorkoutState extends State<NewWorkout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('New Workout'),
         backgroundColor: Colors.orange[500],
       ),
@@ -78,75 +83,76 @@ class _NewWorkoutState extends State<NewWorkout> {
                   }).toList(),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 0,
-                  horizontal: 0,
-                ),
-                child: TextField(
-                  controller: _setsTextController,
-                  cursorColor: Colors.black,
-                  //obscureText: true,
-                  decoration: InputDecoration(
-                      labelStyle: new TextStyle(
-                        color: Colors.black,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      labelText: 'Insert sets here'),
-                ),
+              TextField(
+                controller: _setsTextController,
+                cursorColor: Colors.black,
+
+                //obscureText: true,
+                decoration: InputDecoration(
+                    labelStyle: new TextStyle(
+                      color: Colors.black,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    labelText: 'Insert sets here'),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 0,
-                  horizontal: 0,
-                ),
-                child: TextField(
-                  controller: _repsTextController,
-                  cursorColor: Colors.black,
-                  //obscureText: true,
-                  decoration: InputDecoration(
-                      labelStyle: new TextStyle(
-                        color: Colors.black,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      labelText: 'Insert reps here'),
-                ),
+              TextField(
+                controller: _repsTextController,
+                cursorColor: Colors.black,
+                //obscureText: true,
+                decoration: InputDecoration(
+                    labelStyle: new TextStyle(
+                      color: Colors.black,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    labelText: 'Insert reps here'),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 0,
-                  horizontal: 0,
-                ),
-                child: TextField(
-                  controller: _weightTextController,
-                  cursorColor: Colors.black,
-                  //obscureText: true,
-                  decoration: InputDecoration(
-                      labelStyle: new TextStyle(
-                        color: Colors.black,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey[500]),
-                      ),
-                      labelText: 'Insert weight here'),
-                ),
+              TextField(
+                controller: _weightTextController,
+                cursorColor: Colors.black,
+                //obscureText: true,
+                decoration: InputDecoration(
+                    labelStyle: new TextStyle(
+                      color: Colors.black,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    labelText: 'Insert weight here'),
+              ),
+              TextFormField(
+                minLines: 2,
+                maxLines: 7,
+                controller: _commentTextController,
+                cursorColor: Colors.black,
+                decoration: InputDecoration(
+                    labelStyle: new TextStyle(
+                      color: Colors.black,
+                    ),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey[500]),
+                    ),
+                    labelText: 'Insert comments here'),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 100,
+                  vertical: 30,
                 ),
                 child: FlatButton(
                   color: Colors.orange[500],
@@ -161,6 +167,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                             sets: sets,
                             reps: reps,
                             weight: weight,
+                            comment: comment,
                           ),
                         ));
                   },

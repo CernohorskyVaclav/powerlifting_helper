@@ -1,6 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:powerlifting_helper/database.dart';
 import 'package:powerlifting_helper/new_workout_screen.dart';
 import 'package:powerlifting_helper/workout_general.dart';
+import 'package:powerlifting_helper/workouts_list.dart';
 
 // ignore: must_be_immutable
 class Workouts extends StatefulWidget {
@@ -9,24 +12,32 @@ class Workouts extends StatefulWidget {
       @required this.exerciseValue,
       this.sets,
       this.reps,
-      this.weight});
+      this.weight,
+      this.comment,
+      this.user});
   final String exerciseValue;
   final String sets;
   final String reps;
   final String weight;
+  final String comment;
+  final User user;
 
   @override
   _WorkoutsState createState() => _WorkoutsState();
 }
 
+final workoutsKey = GlobalKey<_WorkoutsState>();
+
 class _WorkoutsState extends State<Workouts> {
   List<WorkoutGeneral> workoutGeneral = [];
 
   void newWorkout() {
+    var workout =
+        new WorkoutGeneral(exerciseValue, sets, reps, weight, comment);
+    workout.setId(saveWorkout(workout));
     this.setState(() {
-      workoutGeneral.add(new WorkoutGeneral(exerciseValue, sets, reps, weight));
+      workoutGeneral.add(workout);
     });
-    print("it worked!");
   }
 
   @override
@@ -88,8 +99,8 @@ class _WorkoutsState extends State<Workouts> {
                 ),
               ),
               ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: 200, maxHeight: 370),
-                child: ListView(
+                constraints: BoxConstraints(maxWidth: 200, maxHeight: 500),
+                /*child: ListView(
                   children: <Widget>[
                     Padding(
                       padding: EdgeInsets.all(10),
@@ -108,7 +119,8 @@ class _WorkoutsState extends State<Workouts> {
                       child: Text("weight: " + weight),
                     ),
                   ],
-                ),
+                ),*/
+                child: WorkoutsList(this.workoutGeneral, widget.user),
               )
             ],
           ),

@@ -33,6 +33,7 @@ dependencies:
   rflutter_alert:
   firebase_auth:
   google_sign_in:
+  firebase_database:
 
 dev_dependencies:
   flutter_test:
