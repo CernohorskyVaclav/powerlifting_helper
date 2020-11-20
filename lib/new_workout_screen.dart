@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/workouts_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:powerlifting_helper/workouts_list.dart';
+
+import 'nav.dart';
 
 class NewWorkout extends StatefulWidget {
   @override
@@ -13,6 +16,7 @@ String sets = "";
 String reps = "";
 String weight = "";
 String comment = "";
+String time = DateTime.now().toString();
 
 class _NewWorkoutState extends State<NewWorkout> {
   var _setsTextController = new TextEditingController();
@@ -27,6 +31,7 @@ class _NewWorkoutState extends State<NewWorkout> {
       reps = _repsTextController.text;
       weight = _weightTextController.text;
       comment = _commentTextController.text;
+      time = DateTime.now().toString();
     });
   }
 
@@ -37,6 +42,20 @@ class _NewWorkoutState extends State<NewWorkout> {
         automaticallyImplyLeading: false,
         title: Text('New Workout'),
         backgroundColor: Colors.orange[500],
+        actions: <Widget>[
+          FlatButton(
+            child: Text(
+              "Go back to workouts",
+              style: TextStyle(fontSize: 18),
+            ),
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Nav()));
+            },
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
       ),
       body: Center(
         child: ButtonTheme(
@@ -168,6 +187,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                             reps: reps,
                             weight: weight,
                             comment: comment,
+                            time: time,
                           ),
                         ));
                   },

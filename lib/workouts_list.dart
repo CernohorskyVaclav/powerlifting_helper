@@ -10,15 +10,15 @@ import 'database.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class WorkoutsList extends StatefulWidget {
-  final List<WorkoutGeneral> listItems;
-  final User user;
-  WorkoutsList(this.listItems, this.user);
-
   @override
   _WorkoutsListState createState() => _WorkoutsListState();
 }
 
 class _WorkoutsListState extends State<WorkoutsList> {
+  void reloadWorkouts() {
+    setState(() {});
+  }
+
   List<Data> dataList = [];
   void initState() {
     super.initState();
@@ -38,17 +38,18 @@ class _WorkoutsListState extends State<WorkoutsList> {
           values[key]["reps"],
           values[key]["weight"],
           values[key]["comment"],
+          values[key]["time"],
         );
+
         dataList.add(data);
+
+        dataList.sort((a, b) => b.time.compareTo(a.time));
       }
+
       setState(() {
         //
       });
     });
-  }
-
-  void resetPage() {
-    setState(() {});
   }
 
   @override
@@ -56,23 +57,26 @@ class _WorkoutsListState extends State<WorkoutsList> {
     return dataList.length == 0
         ? Center(
             child: Text(
-            "No Data Available",
+            "No workouts here :/",
             style: TextStyle(fontSize: 30),
           ))
         : ListView.builder(
             itemCount: dataList.length,
             itemBuilder: (_, index) {
               return CardUI(
-                  dataList[index].exercise,
-                  dataList[index].sets,
-                  dataList[index].reps,
-                  dataList[index].weight,
-                  dataList[index].comment);
+                dataList[index].exercise,
+                dataList[index].sets,
+                dataList[index].reps,
+                dataList[index].weight,
+                dataList[index].comment,
+                dataList[index].time,
+              );
             });
   }
 
+  // ignore: non_constant_identifier_names
   Widget CardUI(String exercise, String sets, String reps, String weight,
-      String comment) {
+      String comment, String time) {
     return Card(
       child: Row(
         children: <Widget>[
@@ -84,7 +88,9 @@ class _WorkoutsListState extends State<WorkoutsList> {
                   "\t\t\t\t\t\t\tReps: " +
                   reps +
                   "\t\t\t\t\t\t\tWeight: " +
-                  weight),
+                  weight +
+                  "\n\nTime: " +
+                  time),
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => WorkoutDetail()));

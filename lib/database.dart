@@ -15,7 +15,8 @@ DatabaseReference saveWorkout(WorkoutGeneral workoutGeneral) {
 }
 
 class Data {
-  String exercise, sets, reps, weight, comment;
+  String exercise, sets, reps, weight, comment, time;
 
-  Data(this.exercise, this.sets, this.reps, this.weight, this.comment);
+  Data(this.exercise, this.sets, this.reps, this.weight, this.comment,
+      this.time);
 }

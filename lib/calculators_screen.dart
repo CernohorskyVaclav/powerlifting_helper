@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/max_calc_screen.dart';
 import 'package:powerlifting_helper/rpe_calc_screen.dart';
+import 'package:powerlifting_helper/sign_in.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Calculators extends StatefulWidget {
@@ -13,8 +14,23 @@ class _CalculatorsState extends State<Calculators> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text('Calculators'),
         backgroundColor: Colors.orange[500],
+        actions: <Widget>[
+          FlatButton(
+            child: Text(
+              "LogOut",
+              style: TextStyle(fontSize: 18),
+            ),
+            textColor: Colors.white,
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SignIn()));
+            },
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
       ),
       body: Center(
         child: Column(
