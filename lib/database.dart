@@ -10,13 +10,13 @@ DatabaseReference saveWorkout(WorkoutGeneral workoutGeneral) {
   final uid = user.uid;
 
   var id = databaseReference.child(uid + '/workouts/').push();
-  id.set(workoutGeneral.toJson());
+  id.set(workoutGeneral.toJson(id));
   return id;
 }
 
 class Data {
-  String exercise, sets, reps, weight, comment, time;
+  String exercise, sets, reps, weight, comment, time, workoutId;
 
   Data(this.exercise, this.sets, this.reps, this.weight, this.comment,
-      this.time);
+      this.time, this.workoutId);
 }

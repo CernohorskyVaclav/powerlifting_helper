@@ -10,6 +10,7 @@ class WorkoutGeneral {
   String comment;
   String time;
   DatabaseReference _id;
+  String idKey;
 
   WorkoutGeneral(
     this.specificExercise,
@@ -18,13 +19,14 @@ class WorkoutGeneral {
     this.weightNum,
     this.comment,
     this.time,
+    this.idKey,
   );
 
   void setId(DatabaseReference id) {
     this._id = id;
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson(DatabaseReference id) {
     return {
       'exercise': this.specificExercise,
       'sets': /*int.parse(*/ this.setsNum /*)*/,
@@ -32,6 +34,7 @@ class WorkoutGeneral {
       'weight': /*int.parse(*/ this.weightNum /*)*/,
       'comment': this.comment,
       'time': this.time,
+      'workoutId': id.key.toString(),
     };
   }
 }

@@ -1,7 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/workouts_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:powerlifting_helper/workouts_list.dart';
+import 'package:powerlifting_helper/workout_general.dart';
 
 import 'nav.dart';
 
@@ -17,6 +19,7 @@ String reps = "";
 String weight = "";
 String comment = "";
 String time = DateTime.now().toString();
+String idKey;
 
 class _NewWorkoutState extends State<NewWorkout> {
   var _setsTextController = new TextEditingController();
@@ -25,6 +28,8 @@ class _NewWorkoutState extends State<NewWorkout> {
   var _commentTextController = new TextEditingController();
 
   void getItems() {
+    var workout = new WorkoutGeneral(
+        exerciseValue, sets, reps, weight, comment, time, idKey);
     setState(() {
       exerciseValue = dropdownStr;
       sets = _setsTextController.text;
@@ -170,7 +175,7 @@ class _NewWorkoutState extends State<NewWorkout> {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 100,
+                  horizontal: 90,
                   vertical: 30,
                 ),
                 child: FlatButton(
@@ -188,6 +193,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                             weight: weight,
                             comment: comment,
                             time: time,
+                            idKey: idKey,
                           ),
                         ));
                   },

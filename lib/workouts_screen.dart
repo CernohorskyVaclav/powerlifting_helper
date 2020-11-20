@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/database.dart';
 import 'package:powerlifting_helper/new_workout_screen.dart';
@@ -10,15 +11,17 @@ import 'nav.dart';
 
 // ignore: must_be_immutable
 class Workouts extends StatefulWidget {
-  Workouts(
-      {Key key,
-      @required this.exerciseValue,
-      this.sets,
-      this.reps,
-      this.weight,
-      this.comment,
-      this.user,
-      this.time});
+  Workouts({
+    Key key,
+    @required this.exerciseValue,
+    this.sets,
+    this.reps,
+    this.weight,
+    this.comment,
+    this.user,
+    this.time,
+    this.idKey,
+  });
   final String exerciseValue;
   final String sets;
   final String reps;
@@ -26,6 +29,7 @@ class Workouts extends StatefulWidget {
   final String comment;
   final User user;
   final String time;
+  final String idKey;
 
   @override
   _WorkoutsState createState() => _WorkoutsState();
@@ -35,9 +39,11 @@ class _WorkoutsState extends State<Workouts> {
   List<WorkoutGeneral> workoutGeneral = [];
 
   void newWorkout() {
-    var workout =
-        new WorkoutGeneral(exerciseValue, sets, reps, weight, comment, time);
+    var workout = new WorkoutGeneral(
+        exerciseValue, sets, reps, weight, comment, time, idKey);
+
     workout.setId(saveWorkout(workout));
+
     this.setState(() {
       workoutGeneral.add(workout);
     });
@@ -53,7 +59,7 @@ class _WorkoutsState extends State<Workouts> {
         actions: <Widget>[
           FlatButton(
             child: Text(
-              "Load workouts",
+              "Reload workouts",
               style: TextStyle(fontSize: 18),
             ),
             textColor: Colors.white,
@@ -108,7 +114,8 @@ class _WorkoutsState extends State<Workouts> {
                             MaterialPageRoute(
                                 builder: (context) => NewWorkout()))
                         .then((value) => this.newWorkout())
-                        .then((value) => setState(() {}));
+                        .then((value) => Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Nav())));
                   },
                   child: Text(
                     "Start a new workout",
@@ -131,7 +138,7 @@ class _WorkoutsState extends State<Workouts> {
               ),
               Container(
                 constraints: BoxConstraints.expand(
-                    height: MediaQuery.of(context).size.height * 0.55),
+                    height: MediaQuery.of(context).size.height * 0.53),
                 child: WorkoutsList(),
               )
             ],

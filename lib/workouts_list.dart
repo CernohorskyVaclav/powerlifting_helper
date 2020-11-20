@@ -6,6 +6,7 @@ import 'package:powerlifting_helper/workout_general.dart';
 import 'package:powerlifting_helper/workouts_screen.dart';
 
 import 'database.dart';
+import 'nav.dart';
 
 final FirebaseAuth auth = FirebaseAuth.instance;
 
@@ -39,6 +40,7 @@ class _WorkoutsListState extends State<WorkoutsList> {
           values[key]["weight"],
           values[key]["comment"],
           values[key]["time"],
+          values[key]["workoutId"],
         );
 
         dataList.add(data);
@@ -50,6 +52,12 @@ class _WorkoutsListState extends State<WorkoutsList> {
         //
       });
     });
+  }
+
+  String getUID() {
+    final User user = auth.currentUser;
+    final uid = user.uid;
+    return uid;
   }
 
   @override
@@ -70,13 +78,14 @@ class _WorkoutsListState extends State<WorkoutsList> {
                 dataList[index].weight,
                 dataList[index].comment,
                 dataList[index].time,
+                dataList[index].workoutId,
               );
             });
   }
 
   // ignore: non_constant_identifier_names
   Widget CardUI(String exercise, String sets, String reps, String weight,
-      String comment, String time) {
+      String comment, String time, String workoutId) {
     return Card(
       child: Row(
         children: <Widget>[
@@ -97,6 +106,31 @@ class _WorkoutsListState extends State<WorkoutsList> {
               },
             ),
           ),
+          Container(
+            height: 50,
+            child: Padding(
+              padding: const EdgeInsets.only(right: 8),
+              child: FlatButton(
+                child: Text(
+                  "remove",
+                  style: TextStyle(fontSize: 18),
+                ),
+                color: Colors.orange[500],
+                textColor: Colors.white,
+                onPressed: () {
+                  String uid = getUID();
+                  FirebaseDatabase.instance
+                      .reference()
+                      .child(uid)
+                      .child('/workouts/')
+                      .child(workoutId)
+                      .remove();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Nav()));
+                },
+              ),
+            ),
+          )
         ],
       ),
     );
