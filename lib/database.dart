@@ -9,8 +9,23 @@ DatabaseReference saveWorkout(WorkoutGeneral workoutGeneral) {
   final User user = auth.currentUser;
   final uid = user.uid;
   String exercise = workoutGeneral.specificExercise;
+  String exerciseChoice;
+  if (exercise == "Back squat" ||
+      exercise == "Front squat" ||
+      exercise == "Paused squat") {
+    exerciseChoice = "squat";
+  } else if (exercise == "Bench press" ||
+      exercise == "Touch & go BP" ||
+      exercise == "Long paused BP") {
+    exerciseChoice = "bench";
+  } else if (exercise == "Conventional deadlift" ||
+      exercise == "Sumo deadlift" ||
+      exercise == "Paused deadlift" ||
+      exercise == "Deficit deadlift") {
+    exerciseChoice = "deadlift";
+  }
 
-  var id = databaseReference.child(uid + '/workouts/').push();
+  var id = databaseReference.child(uid + '/workouts/' + exerciseChoice).push();
   id.set(workoutGeneral.toJson(id));
   return id;
 }

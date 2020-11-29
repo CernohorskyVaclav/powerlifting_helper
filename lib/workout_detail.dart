@@ -7,8 +7,9 @@ import 'package:powerlifting_helper/database.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class WorkoutDetail extends StatefulWidget {
+  final String choiceOfExercise;
   final String workoutId;
-  WorkoutDetail(this.workoutId);
+  WorkoutDetail(this.workoutId, this.choiceOfExercise);
   @override
   _WorkoutDetailState createState() => _WorkoutDetailState();
 }
@@ -30,7 +31,11 @@ class _WorkoutDetailState extends State<WorkoutDetail> {
     final uid = user.uid;
     DatabaseReference referenceData = FirebaseDatabase.instance
         .reference()
-        .child(uid + '/workouts/' + widget.workoutId);
+        .child(uid +
+            '/workouts/' +
+            widget.choiceOfExercise +
+            "/" +
+            widget.workoutId);
     referenceData.once().then((DataSnapshot dataSnapshot) {
       var values = dataSnapshot.value;
       exercise = values["exercise"].toString();
@@ -150,7 +155,7 @@ class _WorkoutDetailState extends State<WorkoutDetail> {
                               Text(
                                 editedComment,
                                 style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
+                                    fontSize: 24, color: Colors.white),
                               ),
                               SizedBox(height: 6),
                               GestureDetector(

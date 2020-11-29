@@ -95,6 +95,7 @@ class _NewWorkoutState extends State<NewWorkout> {
                     "Front squat",
                     "Paused squat",
                     "Paused deadlift",
+                    "Deficit deadlift",
                   ].map<DropdownMenuItem<String>>((String value) {
                     return DropdownMenuItem<String>(
                       value: value,

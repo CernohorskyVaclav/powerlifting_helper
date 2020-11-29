@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:powerlifting_helper/specific_workouts_screen.dart';
 import 'package:powerlifting_helper/workout_detail.dart';
 
 import 'database.dart';
@@ -9,22 +10,21 @@ import 'nav.dart';
 final FirebaseAuth auth = FirebaseAuth.instance;
 
 class WorkoutsList extends StatefulWidget {
+  final String choiceOfExercise;
+  WorkoutsList(this.choiceOfExercise);
   @override
   _WorkoutsListState createState() => _WorkoutsListState();
 }
 
 class _WorkoutsListState extends State<WorkoutsList> {
-  void reloadWorkouts() {
-    setState(() {});
-  }
-
   List<Data> dataList = [];
   void initState() {
     super.initState();
     final User user = auth.currentUser;
     final uid = user.uid;
-    DatabaseReference referenceData =
-        FirebaseDatabase.instance.reference().child(uid + '/workouts/');
+    DatabaseReference referenceData = FirebaseDatabase.instance
+        .reference()
+        .child(uid + '/workouts/' + widget.choiceOfExercise);
     referenceData.once().then((DataSnapshot dataSnapshot) {
       dataList.clear();
       var keys = dataSnapshot.value.keys;
@@ -102,7 +102,8 @@ class _WorkoutsListState extends State<WorkoutsList> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => WorkoutDetail(workoutId)));
+                        builder: (context) =>
+                            WorkoutDetail(workoutId, widget.choiceOfExercise)));
               },
             ),
           ),
@@ -123,10 +124,14 @@ class _WorkoutsListState extends State<WorkoutsList> {
                       .reference()
                       .child(uid)
                       .child('/workouts/')
+                      .child(widget.choiceOfExercise)
                       .child(workoutId)
                       .remove();
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Nav()));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SpecificWorkouts(widget.choiceOfExercise)));
                 },
               ),
             ),
