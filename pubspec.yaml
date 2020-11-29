@@ -34,6 +34,7 @@ dependencies:
   firebase_auth:
   google_sign_in:
   firebase_database:
+  charts_flutter:
 
 dev_dependencies:
   flutter_test:

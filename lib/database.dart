@@ -8,6 +8,7 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 DatabaseReference saveWorkout(WorkoutGeneral workoutGeneral) {
   final User user = auth.currentUser;
   final uid = user.uid;
+  String exercise = workoutGeneral.specificExercise;
 
   var id = databaseReference.child(uid + '/workouts/').push();
   id.set(workoutGeneral.toJson(id));

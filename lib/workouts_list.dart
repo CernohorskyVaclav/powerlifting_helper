@@ -2,8 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/workout_detail.dart';
-import 'package:powerlifting_helper/workout_general.dart';
-import 'package:powerlifting_helper/workouts_screen.dart';
 
 import 'database.dart';
 import 'nav.dart';
@@ -98,11 +96,13 @@ class _WorkoutsListState extends State<WorkoutsList> {
                   reps +
                   "\t\t\t\t\t\t\tWeight: " +
                   weight +
-                  "\n\nTime: " +
-                  time),
+                  "\n\nDate: " +
+                  time.substring(0, 10)),
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WorkoutDetail()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WorkoutDetail(workoutId)));
               },
             ),
           ),

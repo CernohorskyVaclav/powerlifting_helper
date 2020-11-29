@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/database.dart';
 import 'package:powerlifting_helper/new_workout_screen.dart';
@@ -20,7 +19,6 @@ class Workouts extends StatefulWidget {
     this.comment,
     this.user,
     this.time,
-    this.idKey,
   });
   final String exerciseValue;
   final String sets;
@@ -29,7 +27,6 @@ class Workouts extends StatefulWidget {
   final String comment;
   final User user;
   final String time;
-  final String idKey;
 
   @override
   _WorkoutsState createState() => _WorkoutsState();
@@ -39,8 +36,8 @@ class _WorkoutsState extends State<Workouts> {
   List<WorkoutGeneral> workoutGeneral = [];
 
   void newWorkout() {
-    var workout = new WorkoutGeneral(
-        exerciseValue, sets, reps, weight, comment, time, idKey);
+    var workout =
+        new WorkoutGeneral(exerciseValue, sets, reps, weight, comment, time);
 
     workout.setId(saveWorkout(workout));
 
@@ -71,7 +68,7 @@ class _WorkoutsState extends State<Workouts> {
           ),
           FlatButton(
             child: Text(
-              "LogOut",
+              "Logout",
               style: TextStyle(fontSize: 18),
             ),
             textColor: Colors.white,

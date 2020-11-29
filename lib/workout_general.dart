@@ -1,6 +1,4 @@
 import 'package:firebase_database/firebase_database.dart';
-import 'package:powerlifting_helper/workouts_screen.dart';
-import 'package:flutter/material.dart';
 
 class WorkoutGeneral {
   String specificExercise;
@@ -10,7 +8,6 @@ class WorkoutGeneral {
   String comment;
   String time;
   DatabaseReference _id;
-  String idKey;
 
   WorkoutGeneral(
     this.specificExercise,
@@ -19,7 +16,6 @@ class WorkoutGeneral {
     this.weightNum,
     this.comment,
     this.time,
-    this.idKey,
   );
 
   void setId(DatabaseReference id) {

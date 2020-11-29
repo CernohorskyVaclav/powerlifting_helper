@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:powerlifting_helper/max_calc_screen.dart';
 import 'package:powerlifting_helper/rpe_calc_screen.dart';
 import 'package:powerlifting_helper/sign_in.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Calculators extends StatefulWidget {
   @override
@@ -20,7 +19,7 @@ class _CalculatorsState extends State<Calculators> {
         actions: <Widget>[
           FlatButton(
             child: Text(
-              "LogOut",
+              "Logout",
               style: TextStyle(fontSize: 18),
             ),
             textColor: Colors.white,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:powerlifting_helper/calculators_screen.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class MaxCalculator extends StatefulWidget {
