@@ -8,6 +8,7 @@ class WorkoutGeneral {
   String comment;
   String time;
   DatabaseReference _id;
+  String volume;
 
   WorkoutGeneral(
     this.specificExercise,
@@ -16,6 +17,7 @@ class WorkoutGeneral {
     this.weightNum,
     this.comment,
     this.time,
+    this.volume,
   );
 
   void setId(DatabaseReference id) {
@@ -31,6 +33,7 @@ class WorkoutGeneral {
       'comment': this.comment,
       'time': this.time,
       'workoutId': id.key.toString(),
+      'volume': this.volume,
     };
   }
 }

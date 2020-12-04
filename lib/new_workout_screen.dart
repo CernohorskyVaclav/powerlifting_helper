@@ -16,6 +16,7 @@ String reps = "";
 String weight = "";
 String comment = "";
 String time = DateTime.now().toString();
+String volume = "";
 
 class _NewWorkoutState extends State<NewWorkout> {
   var _setsTextController = new TextEditingController();
@@ -24,8 +25,8 @@ class _NewWorkoutState extends State<NewWorkout> {
   var _commentTextController = new TextEditingController();
 
   void getItems() {
-    var workout =
-        new WorkoutGeneral(exerciseValue, sets, reps, weight, comment, time);
+    var workout = new WorkoutGeneral(
+        exerciseValue, sets, reps, weight, comment, time, volume);
     setState(() {
       exerciseValue = dropdownStr;
       sets = _setsTextController.text;
@@ -33,6 +34,8 @@ class _NewWorkoutState extends State<NewWorkout> {
       weight = _weightTextController.text;
       comment = _commentTextController.text;
       time = DateTime.now().toString();
+      volume =
+          (int.parse(sets) * int.parse(reps) * int.parse(weight)).toString();
     });
   }
 
@@ -46,7 +49,7 @@ class _NewWorkoutState extends State<NewWorkout> {
         actions: <Widget>[
           FlatButton(
             child: Text(
-              "Go back to workouts",
+              "Go back",
               style: TextStyle(fontSize: 18),
             ),
             textColor: Colors.white,

@@ -79,7 +79,7 @@ class _WorkoutDetailState extends State<WorkoutDetail> {
             body: Container(
               color: Colors.orange[400],
               constraints: BoxConstraints.expand(
-                  height: MediaQuery.of(context).size.height * 0.40,
+                  height: MediaQuery.of(context).size.height * 0.350,
                   width: MediaQuery.of(context).size.width),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 0),

@@ -37,15 +37,18 @@ class _WorkoutsListState extends State<WorkoutsList> {
           values[key]["reps"],
           values[key]["weight"],
           values[key]["comment"],
-          values[key]["time"],
           values[key]["workoutId"],
+          values[key]["time"],
+          values[key]["volume"],
         );
 
         dataList.add(data);
 
         dataList.sort((a, b) => b.time.compareTo(a.time));
       }
-
+      /*for (int i = 0; i < dataList.length; i++) {
+        print(dataList[i].exercise);
+      }*/
       setState(() {
         //
       });
@@ -75,15 +78,16 @@ class _WorkoutsListState extends State<WorkoutsList> {
                 dataList[index].reps,
                 dataList[index].weight,
                 dataList[index].comment,
-                dataList[index].time,
                 dataList[index].workoutId,
+                dataList[index].time,
+                dataList[index].volume,
               );
             });
   }
 
   // ignore: non_constant_identifier_names
   Widget CardUI(String exercise, String sets, String reps, String weight,
-      String comment, String time, String workoutId) {
+      String comment, String time, String workoutId, String volume) {
     return Card(
       child: Row(
         children: <Widget>[

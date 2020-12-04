@@ -11,16 +11,16 @@ import 'nav.dart';
 
 // ignore: must_be_immutable
 class Workouts extends StatefulWidget {
-  Workouts({
-    Key key,
-    @required this.exerciseValue,
-    this.sets,
-    this.reps,
-    this.weight,
-    this.comment,
-    this.user,
-    this.time,
-  });
+  Workouts(
+      {Key key,
+      @required this.exerciseValue,
+      this.sets,
+      this.reps,
+      this.weight,
+      this.comment,
+      this.user,
+      this.time,
+      this.volume});
   final String exerciseValue;
   final String sets;
   final String reps;
@@ -28,6 +28,7 @@ class Workouts extends StatefulWidget {
   final String comment;
   final User user;
   final String time;
+  final String volume;
 
   @override
   _WorkoutsState createState() => _WorkoutsState();
@@ -38,8 +39,8 @@ class _WorkoutsState extends State<Workouts> {
   List<WorkoutGeneral> workoutGeneral = [];
 
   void newWorkout() {
-    var workout =
-        new WorkoutGeneral(exerciseValue, sets, reps, weight, comment, time);
+    var workout = new WorkoutGeneral(
+        exerciseValue, sets, reps, weight, comment, time, volume);
 
     workout.setId(saveWorkout(workout));
 
@@ -56,18 +57,6 @@ class _WorkoutsState extends State<Workouts> {
         title: Text('Workouts'),
         backgroundColor: Colors.orange[500],
         actions: <Widget>[
-          FlatButton(
-            child: Text(
-              "Reload workouts",
-              style: TextStyle(fontSize: 18),
-            ),
-            textColor: Colors.white,
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Nav()));
-            },
-            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
-          ),
           FlatButton(
             child: Text(
               "Logout",
