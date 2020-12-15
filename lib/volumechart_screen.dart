@@ -1,9 +1,10 @@
+import 'package:charts_flutter/flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'database.dart';
-import 'dart:math';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class VolumeChart extends StatefulWidget {
   final String exerciseChoice;
@@ -92,7 +93,7 @@ class _VolumeChartState extends State<VolumeChart> {
     series = [
       new charts.Series<VolumeSeriesTime, String>(
         id: 'Volume',
-        colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault,
+        colorFn: (_, __) => charts.MaterialPalette.yellow.shadeDefault.darker,
         domainFn: (VolumeSeriesTime vst, _) => vst.time,
         measureFn: (VolumeSeriesTime vst, _) => int.parse(vst.volume),
         data: seriesData,
@@ -112,6 +113,23 @@ class _VolumeChartState extends State<VolumeChart> {
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification:
                 charts.OutsideJustification.middleDrawArea),
+        new charts.ChartTitle('To get specific time click on a bar',
+            behaviorPosition: charts.BehaviorPosition.top,
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+      ],
+      selectionModels: [
+        SelectionModelConfig(changedListener: (SelectionModel model) {
+          if (model.hasDatumSelection)
+            return Alert(
+                    context: context,
+                    title: "Date and time",
+                    desc: model.selectedSeries[0]
+                        .domainFn(model.selectedDatum[0].index)
+                        .toString()
+                        .substring(0, 19))
+                .show();
+        })
       ],
     );
     return new Container(
