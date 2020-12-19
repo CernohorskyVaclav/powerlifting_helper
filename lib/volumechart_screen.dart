@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'database.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter/src/painting/text_style.dart' as prefix;
 
 class VolumeChart extends StatefulWidget {
   final String exerciseChoice;
@@ -113,21 +114,27 @@ class _VolumeChartState extends State<VolumeChart> {
             behaviorPosition: charts.BehaviorPosition.bottom,
             titleOutsideJustification:
                 charts.OutsideJustification.middleDrawArea),
-        new charts.ChartTitle('To get specific time click on a bar',
-            behaviorPosition: charts.BehaviorPosition.top,
-            titleOutsideJustification:
-                charts.OutsideJustification.middleDrawArea),
       ],
       selectionModels: [
         SelectionModelConfig(changedListener: (SelectionModel model) {
           if (model.hasDatumSelection)
             return Alert(
                     context: context,
-                    title: "Date and time",
-                    desc: model.selectedSeries[0]
-                        .domainFn(model.selectedDatum[0].index)
-                        .toString()
-                        .substring(0, 19))
+                    title: "DateTime and volume",
+                    desc: "Date: " +
+                        model.selectedSeries[0]
+                            .domainFn(model.selectedDatum[0].index)
+                            .toString()
+                            .substring(0, 10) +
+                        "\nTime: " +
+                        model.selectedSeries[0]
+                            .domainFn(model.selectedDatum[0].index)
+                            .toString()
+                            .substring(11, 19) +
+                        "\nVolume: " +
+                        model.selectedSeries[0]
+                            .measureFn(model.selectedDatum[0].index)
+                            .toString())
                 .show();
         })
       ],
@@ -136,6 +143,17 @@ class _VolumeChartState extends State<VolumeChart> {
       child: new Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          new Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 15,
+            ),
+            child: Text(
+              "To get specific DateTime and volume click on a bar",
+              style: prefix.TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ),
           new Padding(
             padding: new EdgeInsets.all(5.0),
             child: new SizedBox(

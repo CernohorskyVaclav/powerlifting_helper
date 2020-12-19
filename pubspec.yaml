@@ -35,6 +35,11 @@ dependencies:
   google_sign_in:
   firebase_database:
   charts_flutter:
+  firebase_storage:
+  image_picker:
+  permission_handler:
+  chewie:
+  video_player: 0.11.0
 
 dev_dependencies:
   flutter_test:

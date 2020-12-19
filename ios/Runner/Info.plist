@@ -52,5 +52,12 @@
     		</array>
     	</dict>
     </array>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Permission to access photo gallery</string>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
 </dict>
 </plist>
